@@ -30,12 +30,9 @@ class PlayList:
         return total_duration
 
     def show_best_video(self):
-        playlist_videos = youtube.playlistItems().list(playlistId=self.pl_id,
-                                                       part='contentDetails,snippet',
-                                                       maxResults=50,
-                                                       ).execute()
+
         video_dict = {}
-        for video in playlist_videos['items']:
+        for video in self.playlist_videos['items']:
             video_id = video['contentDetails']['videoId']
             video_response = youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                    id=video_id
